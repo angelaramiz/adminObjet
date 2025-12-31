@@ -1,4 +1,4 @@
-# Goal Manager App
+# AdminObjet App
 
 Aplicación React Native para administrar objetivos personales con etapas y tareas.
 

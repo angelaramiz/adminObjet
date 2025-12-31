@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "nose",
-    "slug": "nose",
+    "name": "adminObjet",
+    "slug": "adminObjet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,10 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.angelaramiz.adminObjet"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ebe19693-0ccb-4e5f-87bc-80f389cce3a2"
+      }
     }
   }
 }
