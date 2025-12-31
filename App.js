@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { initDatabase } from './src/database/db';
+import HomeScreen from './src/screens/HomeScreen';
+import CreateGoalScreen from './src/screens/CreateGoalScreen';
+import GoalDetailScreen from './src/screens/GoalDetailScreen';
+import StageDetailScreen from './src/screens/StageDetailScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  React.useEffect(() => {
+    initDatabase().catch(console.error);
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Objetivos' }} />
+        <Stack.Screen name="CreateGoal" component={CreateGoalScreen} options={{ title: 'Crear Objetivo' }} />
+        <Stack.Screen name="GoalDetail" component={GoalDetailScreen} options={{ title: 'Detalle del Objetivo' }} />
+        <Stack.Screen name="StageDetail" component={StageDetailScreen} options={{ title: 'Detalle de la Etapa' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
