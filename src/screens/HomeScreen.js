@@ -5,18 +5,22 @@ import { ProgressBar } from 'react-native-progress';
 import { getAllGoals } from '../database/goalService';
 
 const HomeScreen = ({ navigation }) => {
+  console.log('HomeScreen rendered');
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
+    console.log('HomeScreen useEffect triggered');
     loadGoals();
   }, []);
 
   const loadGoals = async () => {
+    console.log('Loading goals...');
     try {
       const loadedGoals = await getAllGoals();
+      console.log('Goals loaded:', loadedGoals.length);
       setGoals(loadedGoals);
     } catch (error) {
-      console.error(error);
+      console.error('Error loading goals:', error);
     }
   };
 

@@ -10,8 +10,14 @@ import StageDetailScreen from './src/screens/StageDetailScreen';
 const Stack = createStackNavigator();
 
 export default function App() {
+  console.log('App component rendered');
   React.useEffect(() => {
-    initDatabase().catch(console.error);
+    console.log('Initializing database...');
+    initDatabase().then(() => {
+      console.log('Database initialized successfully');
+    }).catch(error => {
+      console.error('Database initialization failed:', error);
+    });
   }, []);
 
   return (
