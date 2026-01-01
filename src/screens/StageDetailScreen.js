@@ -1,7 +1,6 @@
 // screens/StageDetailScreen.js
 import React, { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { ProgressBar } from 'react-native-progress';
 import * as ImagePicker from 'expo-image-picker';
 
 const StageDetailScreen = ({ route }) => {
@@ -40,12 +39,22 @@ const StageDetailScreen = ({ route }) => {
     </View>
   );
 
+  const stageProgress = stage.getProgress();
+  const stageProgressValue = Math.min(Math.max(stageProgress / 100, 0), 1);
+  
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{stage.title}</Text>
       <Text style={styles.description}>{stage.description}</Text>
-      <ProgressBar progress={stage.getProgress() / 100} width={null} />
-      <Text>{Math.round(stage.getProgress())}% completado</Text>
+      <View style={styles.progressBarContainer}>
+        <View 
+          style={[
+            styles.progressBarFill, 
+            { width: `${stageProgressValue * 100}%` }
+          ]} 
+        />
+      </View>
+      <Text style={styles.progressText}>{Math.round(stageProgress)}% completado</Text>
       <Text style={styles.subHeader}>Tareas:</Text>
       <FlatList
         data={tasks}
@@ -60,6 +69,18 @@ const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
   header: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
   description: { fontSize: 16, marginBottom: 20 },
+  progressBarContainer: { 
+    height: 10, 
+    backgroundColor: '#e0e0e0', 
+    borderRadius: 5, 
+    overflow: 'hidden',
+    marginBottom: 10
+  },
+  progressBarFill: { 
+    height: '100%', 
+    backgroundColor: '#4caf50' 
+  },
+  progressText: { marginBottom: 20, fontSize: 12, color: '#999' },
   subHeader: { fontSize: 20, fontWeight: 'bold', marginBottom: 10 },
   taskItem: { padding: 15, borderBottomWidth: 1, borderBottomColor: '#ccc' },
   taskTitle: { fontSize: 18, fontWeight: 'bold' },
